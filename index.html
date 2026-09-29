@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>我的第一个云端 Web 服务 | 云计算与分布式系统 实验2</title>
+<meta name="description" content="云计算与分布式系统 实验2：基于 GitHub Pages 搭建的静态 Web 服务器演示页面。">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☁️</text></svg>">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav container">
+    <a class="brand" href="#top"><span class="brand-mark">☁</span> CloudLab</a>
+    <ul class="nav-links">
+      <li><a href="#about">关于本站</a></li>
+      <li><a href="#pipeline">部署流程</a></li>
+      <li><a href="#runtime">运行时状态</a></li>
+      <li><a href="#stack">技术栈</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">云计算与分布式系统 · 实验 2</p>
+      <h1>Hello, Cloud!<br>这是我部署在 <span class="accent">GitHub Pages</span> 上的第一个 Web 页面</h1>
+      <p class="lead">
+        本站没有传统意义上的服务器进程，而是由 GitHub 的 CDN 边缘节点直接托管静态资源。
+        如果你能看到这行字，说明 <strong>发布 → 构建 → 访问</strong> 的链路已经跑通了。
+      </p>
+      <div class="hero-meta">
+        <div class="meta-item"><span class="meta-k">托管方式</span><span class="meta-v">GitHub Pages</span></div>
+        <div class="meta-item"><span class="meta-k">服务节点</span><span class="meta-v">Fastly CDN</span></div>
+        <div class="meta-item"><span class="meta-k">协议</span><span class="meta-v">HTTPS / HTTP2</span></div>
+        <div class="meta-item"><span class="meta-k">费用</span><span class="meta-v">¥ 0</span></div>
+      </div>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#pipeline">查看部署流程</a>
+        <a class="btn btn-ghost" id="repoLink" href="#" target="_blank" rel="noopener">查看源码仓库</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <div class="container">
+      <h2 class="section-title">关于本站</h2>
+      <div class="grid grid-3">
+        <article class="card">
+          <div class="card-icon">🗂</div>
+          <h3>它到底是什么</h3>
+          <p>一组纯静态文件（HTML / CSS / JS）。GitHub Pages 把它们当作网站根目录，通过 <code>username.github.io/仓库名/</code> 的形式对外提供访问。</p>
+        </article>
+        <article class="card">
+          <div class="card-icon">⚡</div>
+          <h3>“服务器”在哪里</h3>
+          <p>没有我能登录的主机。请求由 GitHub 的边缘节点响应，静态资源被缓存并分发，这就是 Serverless / 静态托管的典型形态。</p>
+        </article>
+        <article class="card">
+          <div class="card-icon">🔒</div>
+          <h3>为什么选它</h3>
+          <p>免费、无需绑定银行卡、自带 HTTPS 证书、天然具备版本管理（每次 <code>git push</code> 就是一次发布）。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="pipeline" class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">从本地到公网的四步</h2>
+      <ol class="steps">
+        <li class="step">
+          <span class="step-no">1</span>
+          <div>
+            <h3>创建仓库</h3>
+            <p>在 GitHub 上新建一个公开仓库，例如 <code>cloud-lab</code>。仓库名会成为 URL 路径的一部分。</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step-no">2</span>
+          <div>
+            <h3>推送页面</h3>
+            <p>把 <code>index.html</code>、<code>css/</code>、<code>js/</code> 提交到 <code>main</code> 分支。也可以用网页端 “Add file → Upload files” 直接拖拽上传。</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step-no">3</span>
+          <div>
+            <h3>开启 Pages</h3>
+            <p>进入 <code>Settings → Pages</code>，Source 选 <code>Deploy from a branch</code>，分支选 <code>main</code>、目录选 <code>/ (root)</code>，保存。</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step-no">4</span>
+          <div>
+            <h3>访问验证</h3>
+            <p>等待约 1 分钟，构建成功后页面顶部会出现访问地址。用浏览器打开即可看到本页。</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="runtime" class="section">
+    <div class="container">
+      <h2 class="section-title">运行时状态</h2>
+      <p class="section-desc">下面这些数据由浏览器端 JavaScript 实时计算，用来验证静态托管环境下脚本同样能正常执行。</p>
+      <div class="grid grid-4">
+        <div class="stat">
+          <span class="stat-v" id="statTime">--:--:--</span>
+          <span class="stat-k">当前本地时间</span>
+        </div>
+        <div class="stat">
+          <span class="stat-v" id="statLoad">--</span>
+          <span class="stat-k">本页加载耗时 (ms)</span>
+        </div>
+        <div class="stat">
+          <span class="stat-v" id="statVisit">--</span>
+          <span class="stat-k">本机累计访问次数</span>
+        </div>
+        <div class="stat">
+          <span class="stat-v" id="statProto">--</span>
+          <span class="stat-k">访问协议</span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>请求链路自检</h3>
+        <table class="tbl">
+          <tbody>
+            <tr><th>当前域名</th><td id="infoHost">—</td></tr>
+            <tr><th>页面路径</th><td id="infoPath">—</td></tr>
+            <tr><th>来源缓存</th><td id="infoCache">—</td></tr>
+            <tr><th>浏览器 UA</th><td id="infoUA" class="mono">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="stack" class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">技术栈</h2>
+      <div class="tags">
+        <span class="tag">HTML5</span>
+        <span class="tag">CSS3 (Grid / Flexbox / 变量)</span>
+        <span class="tag">原生 JavaScript (ES6+)</span>
+        <span class="tag">Git</span>
+        <span class="tag">GitHub Pages</span>
+        <span class="tag">Fastly CDN</span>
+        <span class="tag">HTTPS</span>
+        <span class="tag">零构建 / 零依赖</span>
+      </div>
+      <div class="panel note">
+        <h3>关于 404 页面</h3>
+        <p>仓库中同时提供了 <code>404.html</code>。GitHub Pages 在找不到资源时会返回它，这算是最小可用的错误处理，也方便后续改造成单页应用的路由回退页。</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>云计算与分布式系统 · 实验 2 云环境下的服务器环境搭建</p>
+    <p class="muted">本页面托管于 GitHub Pages · 最后构建时间 <span id="buildTime">—</span></p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
